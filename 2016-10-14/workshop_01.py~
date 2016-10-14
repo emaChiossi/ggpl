@@ -26,7 +26,7 @@ def create(beamSection, pillarSection,distanceBetweenPillar, interstoryHeight):
 		Zbea = Zbea+[-i,bz]
 	Ybea = [lunghezza+py] 
 	Ypil = Ypil+[py]	
-	#costruzione pilone
+	#costruzione pilastro
 	aPil = PROD([QUOTE(Ypil),QUOTE(Zpil)])
 	piloni = PROD([QUOTE(Xpil),aPil])
 	#costruzione trave
