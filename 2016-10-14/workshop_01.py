@@ -31,3 +31,5 @@ def create(beamSection, pillarSection,distanceBetweenPillar, interstoryHeight):
 	travi=PROD([QUOTE(Xbea),aTrav])
 
 	VIEW(STRUCT([piloni,travi]))
+
+create((.3,.3),(.4,.4),[.5,.5,.5],[1,1,1])
