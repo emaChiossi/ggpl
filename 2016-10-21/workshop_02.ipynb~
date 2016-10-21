@@ -4,8 +4,8 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "<h1><center>Workshop n°2 di GGPL di Emanuele Chiossi, mat. 439468</center></h1>\n",
-    "<h3><center>Parametric spatial building frame in reinforced concrete</center></h3>\n"
+    "<h1>Workshop n°2 di GGPL di Emanuele Chiossi, mat. 439468</h1>\n",
+    "<h3>Parametric spatial building frame in reinforced concrete</h3>\n"
    ]
   },
   {
@@ -19,7 +19,9 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Prendendo come punto di partenza il lavoro eseguito nel workshop n°1, si vuole realizzare una struttura in cemento armato prendendo spunto dal seguente modello di riferimento preso in rete:"
+    "L'obiettivo di questo workshop è quello di reallizzare una struttura in cemento armato, partendo dal risultato ottenuto dal workshop_01.\n",
+    "\n",
+    "Come prima cosa, occorre prendere una immagine dal web che mi dia un'idea su come realizzare la struttura, ho scelto la seguente:"
    ]
   },
   {
@@ -33,16 +35,54 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "<h2>Programma Python Workshop_02:</h2>"
+    "L'input della funzione che costruisce la struttura è rappresentato da un file .csv, in cui nelle linee dispari ci sono i vettori di traslazione tridimensionali, mentre nelle linee pari ci sono i parametri di riferimento del telaio piano.\n",
+    "\n",
+    "Tramite le funzioni STRUCT, PROD e QUOTE si costruiscono i pilastri e le travi, il codice è semplice e la procedura adottata nel particolare per la costruzione dei singoli elementi è facilmente intuibile, ho seguito rigidamente le specifiche.\n",
+    "\n",
+    "Le variabili utilizzate sono le seguenti:\n",
+    "<ul>\n",
+    "<li>beamSection:(bx,bz) sezione della trave</li>\n",
+    "<li>pillarSection:(px,py) sezione del pilastro</li>\n",
+    "<li>distanceBetweenPillar: distanza tra i pilastri</li>\n",
+    "<li>interstoryHeight: distanza tra i piani della struttura</li>\n",
+    "<li>distance: distanza dal pilastro X all'origine degli assi</li>\n",
+    "<li>x/y/zPillar: coordinate x,y,z pilastri</li>\n",
+    "<li>x/y/zBeam: coordinate x,y,z travi</li>\n",
+    "<li>pil,pillar: variabile che identifica i pilastri</li>\n",
+    "<li>bea,beam: variabile che identifica le travi</li>\n",
+    "<li>frame: variabile che identifica la struttura</li>\n",
+    "<li>transactions: vettore delle traslazioni</li>\n",
+    "<li>orizontalBeam: variabile che identifica le travi orizzontali</li>\n",
+    "<li>structure: variabile che identifica la struttura senza travi orizzontali</li>\n",
+    "<li>structure: variabile che identifica la struttura con travi orizzontali aggiunte</li>\n",
+    "</ul>\n",
+    "\n",
+    "Altre decisioni implementative sono presenti sotto forma di commento nel codice."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Codice:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 5,
+   "execution_count": 1,
    "metadata": {
     "collapsed": false
    },
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Evaluating fenvs.py..\n",
+      "...fenvs.py imported in 0.011629 seconds\n"
+     ]
+    }
+   ],
    "source": [
     "from pyplasm import *\n",
     "import csv\n",
