@@ -34,4 +34,4 @@ def create(beamSection, pillarSection,distanceBetweenPillar, interstoryHeight):
 	travi=PROD([QUOTE(Xbea),aTrav])
 	VIEW(STRUCT([piloni,travi]))
 
-create((.4,.4),(.4,.4),[4,4,4],[3,3,3])
+create((.4,.4),(.8,.8),[4,4,4],[3,3,3])
