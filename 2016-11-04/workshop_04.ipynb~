@@ -19,45 +19,27 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Per la realizzazione del tetto più semplice sono state prese dal web le seguenti immagini di riferimento: nello specifico, per la seconda immagine si ci riferisce in particolare al #3. \n",
+    "In questo homework lo scopo è quello di realizzare due modelli di tetto di una casa, uno più semplice ed uno più complesso.\n",
     "\n",
-    "Le scelte progettuali e le variabili impiegate sono spiegate passo passo tramite il commento del codice prodotto."
+    "La prima cosa da fare è prendere delle immagini di riferimento dal web, io ho scelto le seguenti:\n",
+    "<ul>\n",
+    "<li>tetto semplice: per la seconda immagine si ci riferisce al numero 3\n",
+    "![alt text](image.png)\n",
+    "![alt text](image2.jpg)</li>\n",
+    "<li>tetto complesso:\n",
+    "![alt text](image3.gif)</li>\n",
+    "</ul>"
    ]
   },
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "![alt text](image.png)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "![alt text](image2.jpg)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "Per la realizzazione del tetto più complesso è stata presa la seguente immagine:"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "![alt text](image3.gif)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "Questo è lo schema di riferimento realizzato da me per costruire il tetto semplice e complesso, con relativi vertici e coordinate: \n",
-    "ps: ho provato più volte a caricarla dritta (rotate 180°) ma jupyter non era d'accordo!"
+    "Per facilitarmi la costruzione dei modelli ho deciso di realizzare degli schemi di riferimento sul quale basarmi, con relativi vertici e coordinate di ognuno, propositamente fatto in scala con 1 metro corrispondente a 4 quadretti. \n",
+    "\n",
+    "I vertici identificati da numero e a pedice una s (sotto) sono i vertici ad altezza 0, tutti gli altri sono ad altezza 1.\n",
+    "\n",
+    "Questo è lo schema del tetto complesso:"
    ]
   },
   {
@@ -71,7 +53,29 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Codice:"
+    "Lo schema del tetto semplice è facilmente ricavabile da quello complesso, basta eliminare la parte del tetto che sporge sulla destra.\n",
+    "\n",
+    "Come suggerito dalle specifiche, sono stati definiti e numerati tutti i vertici partendo dal numero 1. Fatto ciò, il tetto è stato scomposto in facce (celle convesse) senza introdurre nuovi vertici e tramite la funzione MKPOL si sono realizzati entrambi i tetti.\n",
+    "\n",
+    "La parte complessa del workshop consiste nel ripulire la struttura in output dalle funzioni drawSimple() e drawComplex(), così da poter avere un risultato non \"pieno\" e pulito, con la struttura portante del tetto e le coperture ben visibili.\n",
+    "\n",
+    "Le variabili utilizzate a tale scopo sono le seguenti:\n",
+    "<ul>\n",
+    "<li>vertexs: vettore di vettori, ognuno dei quali contine le coordinate x, y, z</li>\n",
+    "<li>cells: vettore di vettori, ognuno dei quali rappresenta una faccia, ovvero una cella convessa</li>\n",
+    "<li>roof: tetto realizzato con la funzione MKPOL</li>\n",
+    "<li>skeleton1: 1-scheletro della struttura</li>\n",
+    "<li>skeleton2: 2-scheletro della struttura</li>\n",
+    "<li>cells2vertexs: manipolo la lista delle celle andando a sostituire al numero del vertice X le coordinate del vertice X ottentendo la descrizione delle facce con le coordinate dei punti corrispondenti</li>\n",
+    "<li>cells2vertexsClean: contiene gli elementi della lista cells2vertexs senza doppioni</li>\n",
+    "<li>app: porto al valore 0 i numeri in cells2vertexsClean che sono molto prossimi allo 0 (0.00000000000000001,-0.000000000001) e li memorizzo in app\n",
+    "</li>\n",
+    "<li>cellsClean: dalla lista app, ricostruisco la lista delle celle non considerando i doppioni, quindi modifico opportunamente i valori di ogni faccia</li>\n",
+    "<li>cells2vertexsFinal: da cells2vertexsClean, mi interessano solo i vertici \"perimetrali\", per cui quelli con z!=0 e i vertici con z=0 e nessun altro vertice sopra</li>\n",
+    "<li>structure: rappresenta la copertura del tetto</li>\n",
+    "</ul>\n",
+    "\n",
+    "Ulteriori considerazioni sulla procedura di pulizia delle liste di vertici e celle per una visualizzazione migliore del tetto sono contenute nei commenti del codice, che è il seguente:"
    ]
   },
   {
